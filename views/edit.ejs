@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>📚 Becca Reading List 📚</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="css/bookList.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Update <%= book.title %>
+        </h1>
+        <form method="POST" action="/books/<%=book._id%>?_method=PUT" id="newBookForm">
+
+            <!-- Title Form Input -->
+            <div class="form-group row pr-2">
+                <label class="col-3 text-align-left" for="title">Book Title: </label>
+                <input class="col-8 form-control" value="<%=book.title%>" type="text" class="input" name="title"
+                    id="title" placeholder="Book Title" required>
+            </div>
+
+            <!-- Author Form Input -->
+            <div class="form-group row pr-2">
+                <label class="col-3 text-align-left" for="author">Author Name: </label>
+                <input class="col-8 form-control" type="text" value="<%=book.author%>" placeholder="Author Name"
+                    name="author" id="author">
+            </div>
+
+
+
+            <!-- Pages and Progress Form Inputs -->
+            <div class="form-group row pr-2">
+                <label class="col-3 text-align-left" for="pages">Pages: </label>
+                <input class="col-3 form-control" type="number" value="<%=book.pages%>" id="pages" name="pages" min="0"
+                    max="2000" placeholder="###">
+                <label class="col-3 text-align-left" for="progressPercent">Progress: </label>
+                <input class="col-2 form-control" type="number" id="progressPercent" value="<%=book.progress%>"
+                    name="progressPercent" min="0" max="100" placeholder="##">%
+            </div>
+            <!-- Audiobook Length Form Input -->
+            <div class="form-group row pr-2">
+                <label class="col-3 text-align-left" for="audioLengthHours">Audiobook Length (hrs): </label>
+                <input class="col-3 form-control" type="text" id="audioLengthHours" value="<%=book.audioLengthHours%>"
+                    name="audioLengthHours" placeholder="# in hours">
+
+                <label class="col-3 text-align-left" for="audioLengthMinutes">Audiobook Length (mins): </label>
+                <input class="col-2 form-control" type="text" id="audioLengthMinutes"
+                    value="<%=book.audioLengthMinutes%>" name="audioLengthMinutes" placeholder="# in minutes">
+            </div>
+
+            <!-- Due or Own Form Input  -->
+            <div class="form-group row pr-2">
+                <label class="col-5 text-align-left" for="dueOrOwn">Date due if library, or if you own
+                    book/audio:
+                </label>
+                <input class="col-6 form-control" type="text" value="<%=book.dueOrOwn%>" id="dueOrOwn" name="dueOrOwn"
+                    placeholder="ebook due 9/30, own audio">
+            </div>
+
+            <!-- Year Finished -->
+            <div class="form-group row pr-2">
+                <label class="col-5 text-align-left" for="yearFinished">Year Finished:</label>
+                <input class="col-6 form-control" type="number" min="2008" step="1" max="2022"
+                    value="<%=book.yearFinished %>" id="yearFinished" name="yearFinished" placeholder="2021">
+            </div>
+
+            <!-- Submit Section -->
+            <div class="submitSection">
+                <button class="btn form-btn btn-success" type="submit" id="submit">Update Book Info</button>
+            </div>
+        </form>
+        <a href="/">Back to Main Page</a>
+    </div>
+</body>

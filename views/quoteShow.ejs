@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Quote</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body class="container">
+    <h1>Quote</h1>
+    <p class="card col-sm-12 col-md-6 col-lg-4">
+        <span class="card-body">
+            <%= quote.quoteContent %>
+        </span>
+    <div class="card card-footer col-sm-12 col-md-6 col-lg-4"><span class="author">
+            -<%= quote.author %>
+        </span> <span class="book"> (<%= quote.book %>) </span> </div>
+    </p>
+    <div class="card col-sm-12 col-md-6 col-lg-4 mt-3 mb-4"> Tags:
+        <%= quote.tags %>
+            <br>
+            <span class="likes"> Likes <%= quote.likes %> </span>
+    </div>
+
+    <button class="btn btn-warning d-inline" href="/like"
+        onclick="document.getElementsByClassName('likes')[0].innerText = 'Likes <%= quote.likes + 1 %>'">Add
+        Like</button><br><br>
+    <a class="btn btn-primary btn-md d-inline" href="/quotes">Back to all quotes</a>
+    <a class="btn btn-success btn-md d-inline" href="/quotes/<%=quote._id%>/edit">Edit this quote</a>
+    <br><br>
+    <div class="row">
+        <h2 class="col-3">User Notes on this Quote:</h2>
+        <p class="col-9">
+            <%= quote.userNotes %>
+        </p>
+    </div>
+    <hr>
+    <form method="POST" action="/quotes/<%= quote._id %>?_method=DELETE">
+        <button class="btn btn-danger">DELETE THIS QUOTE</button>
+    </form>
+</body>
+
+</html>

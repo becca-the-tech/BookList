@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Quotes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        div {
+            margin-bottom: 20px;
+            padding: 5px;
+        }
+
+        .card {
+            background-color: rgb(240, 236, 236);
+        }
+
+        .card-body {
+            background-color: hsla(203, 92%, 75%, 0.5);
+            color: navy;
+            margin: 10px 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: snow;
+            text-decoration: none;
+        }
+
+        i:hover {
+            color: rgb(0, 255, 42);
+            background: rgb(76, 0, 255);
+        }
+
+        form,
+        button {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <h1>List of all quotes</h1>
+    <div class="row">
+        <% for(let quote of quotes){ %>
+            <div class="card col-sm-12 col-md-6 col-lg-4">
+                <% let isFavorite=quote.isFavorite ? "bi-bookmark-heart-fill" : "bi-bookmark-heart" %>
+                    <form class="d-inline" method="POST" action="/quotes/<%=quote._id%>/favorite?_method=PATCH"
+                        id="favoriteForm">
+                        <button class="hidden-button"><i class="text-end bi <%= isFavorite %> d-inline"></i></button>
+                    </form>
+
+                    <% let isWritingList=quote.isWritingList ? "bi-pen-fill" : "bi-pen" %>
+                        <form class="d-inline" method="POST" action="/quotes/<%=quote._id%>/writingList?_method=PATCH"
+                            id="writeForm">
+                            <button class="hidden-button"><i
+                                    class="text-end bi <%= isWritingList %> d-inline"></i></button>
+                        </form>
+
+                        <a class="card-body" href="/quotes/<%= quote._id %>">
+                            <%= quote.quoteContent %>
+                        </a>
+                        <p class="footer">-<%= quote.book %>
+                        </p>
+            </div>
+            <% } %>
+    </div>
+    <a href="/quotes/new">Add a new quote</a>
+
+    <script src="/quotes.js"></script>
+</body>
+
+</html>
